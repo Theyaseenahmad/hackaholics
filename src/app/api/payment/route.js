@@ -1,14 +1,13 @@
 
 import Stripe from 'stripe';
+import jwt from 'jsonwebtoken'
 
-// export type dataType = {
-//     price:number,
-//     pincode:string,
-//     address:string,
-//     qty:number,
-//     product_id?:string
-
-// }
+//             orderId: order?.data.order.id,
+//             price:Number(values.price),
+//             product_id:parseInt(values.product_id as string),
+//             qty:Number(values.qty),
+//             address:values.address,
+//             pincode:String(values.pincode)
 
 const jwtSecret = process.env.JWT_SECRET
 
@@ -64,6 +63,8 @@ export async function POST(req){
         return Response.json({checkout:checkoutSession,url:checkoutSession.url},{status:200})
         
     } catch (error) {
+        console.log('error',error);
+        
         return Response.json({message:"error payment bitch",error},{status:500})
     }
 }
